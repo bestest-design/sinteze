@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const overlay = document.querySelector("overlay");
   const audio = document.getElementById("backgroundAudio");
-  const h1 = document.querySelector("h1[main]");
+  const logo = document.getElementById("logo");
   const playStopBtn = document.getElementById("playStop");
   const muteUnmuteBtn = document.getElementById("muteUnmute");
 
@@ -25,14 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Adjust the font size of h1 based on low-end frequencies
-  function adjustFontSize() {
+  // Adjust the size of the logo based on low-end frequencies
+  function adjustLogoSize() {
     analyser.getByteFrequencyData(dataArray);
     const bass =
       dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
-    h1.style.fontSize = 1.875 + bass / 75 + "rem";
-    requestAnimationFrame(adjustFontSize);
+    logo.style.width = 20 + bass / 15 + "rem"; // Adjust the scaling factor as needed
+    requestAnimationFrame(adjustLogoSize);
   }
 
   // Play audio function
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .play()
       .then(() => {
         playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        adjustFontSize();
+        adjustLogoSize();
       })
       .catch((error) => {
         console.log("Error playing audio:", error);
@@ -74,9 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
       : '<i class="fas fa-volume-up"></i>';
   });
 
-  function removeOverly() {
+  function removeOverlay() {
     playAudio();
-    // Start the fade-out effect
     overlay.style.transition = "opacity 0.5s ease-out"; // Set the duration and easing of the fade-out
     overlay.style.opacity = "0"; // Start the fade-out by setting opacity to 0
 
@@ -86,6 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500); // Timeout duration matches the transition duration
   }
 
-  // Attach the removeOverly function to the click event
-  overlay.addEventListener("click", removeOverly);
+  // Attach the removeOverlay function to the click event
+  overlay.addEventListener("click", removeOverlay);
 });
