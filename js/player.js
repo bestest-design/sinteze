@@ -1,3 +1,5 @@
+// player.js
+
 // Audio handling
 const audio = new Audio("assets/sinteze.ogg");
 audio.loop = true;
