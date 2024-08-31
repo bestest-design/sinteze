@@ -69,20 +69,24 @@
   <nav
     class="sticky bottom-0 left-0 right-0 top-0 flex justify-between items-center px-4 py-2 backdrop-filter backdrop-blur-lg border-t border-gray-600 shadow-[rgba(0,0,15,0.2)_0px_2px_20px_15px] firefox:bg-opacity-90">
 
-    <a href="#home">
+    <a href="#home" class="flex">
       <img src="assets/sin.svg?v1.2" class="w-auto h-6" />
     </a>
 
-    <div class="flex space-x-4 text-lg font-bold text-gray-300">
-      <a href="#kas" class="uppercase text-center px-2 hover:text-white">Kas</a>
-      <span class="text-gray-400 text-xs content-center">::</span>
-      <a href="#kur" class="uppercase text-center px-2 hover:text-white">Kur</a>
-      <span class="text-gray-400 text-xs content-center">::</span>
-      <a href="#kad" class="uppercase text-center px-2 hover:text-white">Kad</a>
-      <span class="text-gray-400 text-xs content-center">::</span>
-      <a href="#konkurss" class="uppercase text-center px-2 hover:text-white">Konkurss</a>
-      <span class="text-gray-400 text-xs content-center">::</span>
-      <a href="#arhivs" class="uppercase text-center px-2 hover:text-white">Arhīvs</a>
+    <div class="flex flex-col lg:flex-row space-x-4 text-lg font-bold text-gray-300 items-center">
+      <div class="flex flex-row">
+        <a href="#kas" class="uppercase text-center px-2 hover:text-white">Kas</a>
+        <span class="text-gray-400 text-xs content-center">::</span>
+        <a href="#kur" class="uppercase text-center px-2 hover:text-white">Kur</a>
+        <span class="text-gray-400 text-xs content-center">::</span>
+        <a href="#kad" class="uppercase text-center px-2 hover:text-white">Kad</a>
+      </div>
+      <div class="flex flex-row">
+        <span class="text-gray-400 text-xs content-center hidden lg:block">::</span>
+        <a href="#konkurss" class="uppercase text-center px-2 hover:text-white">Konkurss</a>
+        <span class="text-gray-400 text-xs content-center">::</span>
+        <a href="#arhivs" class="uppercase text-center px-2 hover:text-white">Arhīvs</a>
+      </div>
     </div>
 
     <div class="flex space-x-4 text-xs">
