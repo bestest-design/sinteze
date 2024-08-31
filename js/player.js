@@ -1,48 +1,59 @@
 // player.js
+document.addEventListener("DOMContentLoaded", function () {
+  const audio = document.getElementById("backgroundAudio");
+  const h1 = document.querySelector("h1[main]");
 
-// Audio handling
-const audio = new Audio("assets/sinteze.ogg");
-audio.loop = true;
-audio.play();
+  const playStopBtn = document.getElementById("playStop");
+  const muteUnmuteBtn = document.getElementById("muteUnmute");
 
-const h1 = document.querySelector("h1[main]");
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const analyser = audioContext.createAnalyser();
-analyser.fftSize = 256;
-const source = audioContext.createMediaElementSource(audio);
-source.connect(analyser);
-analyser.connect(audioContext.destination);
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
+  let audioContext, analyser, source, bufferLength, dataArray;
 
-function adjustFontSize() {
-  analyser.getByteFrequencyData(dataArray);
-  const bass =
-    dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
-    (bufferLength / 8);
-  h1.style.fontSize = 3 + bass / 100 + "rem";
-  requestAnimationFrame(adjustFontSize);
-}
+  // Initialize Audio Context and Analyser only after user interaction
+  function initAudio() {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      source = audioContext.createMediaElementSource(audio);
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+      bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array(bufferLength);
 
-adjustFontSize();
-
-// Play/Stop and Mute/Unmute buttons
-const playStopBtn = document.getElementById("playStop");
-const muteUnmuteBtn = document.getElementById("muteUnmute");
-
-playStopBtn.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
-    playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  } else {
-    audio.pause();
-    playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+      adjustFontSize();
+    }
   }
-});
 
-muteUnmuteBtn.addEventListener("click", () => {
-  audio.muted = !audio.muted;
-  muteUnmuteBtn.innerHTML = audio.muted
-    ? '<i class="fas fa-volume-mute"></i>'
-    : '<i class="fas fa-volume-up"></i>';
+  // Adjust the font size of h1 based on low-end frequencies
+  function adjustFontSize() {
+    analyser.getByteFrequencyData(dataArray);
+    const bass =
+      dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
+      (bufferLength / 8);
+    h1.style.fontSize = 3 + bass / 100 + "rem";
+    requestAnimationFrame(adjustFontSize);
+  }
+
+  // Play/Stop button event listener
+  playStopBtn.addEventListener("click", () => {
+    initAudio(); // Initialize audio context if not done already
+    if (audio.paused) {
+      audio.play().catch((error) => console.log(error));
+      playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+      audio.pause();
+      playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  });
+
+  // Mute/Unmute button event listener
+  muteUnmuteBtn.addEventListener("click", () => {
+    audio.muted = !audio.muted;
+    muteUnmuteBtn.innerHTML = audio.muted
+      ? '<i class="fas fa-volume-mute"></i>'
+      : '<i class="fas fa-volume-up"></i>';
+  });
+
+  // Start audio after the user interacts with the page
+  document.body.addEventListener("click", initAudio, { once: true });
 });
