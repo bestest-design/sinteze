@@ -9,7 +9,7 @@ tailwind.config = {
     },
   },
   plugins: [
-    plugin(function ({ addVariant, e, postcss }) {
+    function ({ addVariant, e, postcss }) {
       addVariant("firefox", ({ container, separator }) => {
         const isFirefoxRule = postcss.atRule({
           name: "-moz-document",
@@ -23,6 +23,6 @@ tailwind.config = {
           )}`;
         });
       });
-    }),
+    },
   ],
 };
