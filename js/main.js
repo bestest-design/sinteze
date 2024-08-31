@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let bass =
       dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
-    bass = bass / 5;
+    bass = bass / 4;
 
     // Calculate midrange frequencies (middle 2/8 to 4/8 of the dataArray)
     let midrange =
@@ -40,13 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
         .slice(bufferLength / 4, bufferLength / 2)
         .reduce((a, b) => a + b, 0) /
       (bufferLength / 4);
-    midrange = midrange / 20;
+    midrange = midrange / 70;
 
     // Calculate high-end frequencies (last 1/8 of the dataArray)
     let highEnd =
       dataArray.slice((bufferLength * 7) / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 4);
-    highEnd = highEnd / 20;
+    highEnd = highEnd / 10;
 
     console.log(`bass : ${bass}`);
     console.log(`midrange : ${midrange}`);
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Adjust logo size using the frequencies
     let newSize = !audio.paused
-      ? Math.min(80, Math.max(20, bass * (highEnd + midrange) * 0.5))
+      ? Math.min(80, Math.max(20, bass + highEnd)
       : 20;
 
     console.log(`newSize : ${newSize}rem`);
