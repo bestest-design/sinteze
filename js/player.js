@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const bass =
       dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
-    h1.style.fontSize = 3 + bass / 100 + "rem";
+    h1.style.fontSize = 1.875 + bass / 75 + "rem";
     requestAnimationFrame(adjustFontSize);
   }
 
