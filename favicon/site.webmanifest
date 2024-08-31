@@ -1,0 +1,19 @@
+{
+    "name": "Sint\u0113ze",
+    "short_name": "Sint\u0113ze",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#a0a0a0",
+    "background_color": "#a0a0a0",
+    "display": "standalone"
+}
