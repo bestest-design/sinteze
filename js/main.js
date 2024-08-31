@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let bass =
       dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
-    bass = bass / 4;
+    bass = bass / 5;
 
     // Calculate midrange frequencies (middle 2/8 to 4/8 of the dataArray)
     let midrange =
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .slice(bufferLength / 4, bufferLength / 2)
         .reduce((a, b) => a + b, 0) /
       (bufferLength / 4);
-    midrange = midrange / 70;
+    midrange = midrange / 60;
 
     // Calculate high-end frequencies (last 1/8 of the dataArray)
     let highEnd =
