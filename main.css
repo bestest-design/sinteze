@@ -1,3 +1,12 @@
+h1[main] {
+  opacity: 0;
+}
+
+h1[main]::before {
+  content: " ";
+  background-image: url('assets/sinteze.svg');
+}
+
 .noize {
   position: fixed;
   top: -50%;
@@ -6,7 +15,7 @@
   bottom: -50%;
   width: 200%;
   height: 200vh;
-  background: transparent url('../assets/noize.png') repeat 0 0;
+  background: transparent url('assets/noize.png') repeat 0 0;
   background-repeat: repeat;
   animation: noize-oscillator .2s infinite;
   opacity: .6;
