@@ -6,6 +6,9 @@ tailwind.config = {
       colors: {
         dark: "#111111",
       },
+      fontFamily: {
+        mono: ["ui-monospace", '"Kode Mono"'],
+      },
     },
   },
   plugins: [
