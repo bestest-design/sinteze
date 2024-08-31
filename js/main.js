@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       (bufferLength / 8);
 
     // Adjust logo size using the midrange and high-end frequencies
-    const newSize = 30 + (bass / 5) + (midrange / 50) * (highEnd / 100); // Adjust the scaling factors as needed
+    const newSize = 25 + (bass / 5) * (highEnd / 100); // Adjust the scaling factors as needed
 
     logo.style.width = newSize + "rem"; // Adjust the logo width based on midrange and high-end frequencies
     logo.style.height = "auto"; // Maintain aspect ratio by automatically adjusting the height
