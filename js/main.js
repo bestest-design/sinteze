@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Adjust logo size using the frequencies
     let newSize = !audio.paused
-      ? Math.min(80, Math.max(20, bass + highEnd)
+      ? Math.min(80, Math.max(20, bass + highEnd))
       : 20;
 
     console.log(`newSize : ${newSize}rem`);
