@@ -29,26 +29,34 @@ document.addEventListener("DOMContentLoaded", function () {
     analyser.getByteFrequencyData(dataArray);
 
     // Calculate bass (low-end) frequencies (first 1/8 of the dataArray)
-    const bass =
+    let bass =
       dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
+    bass = bass / 5;
 
     // Calculate midrange frequencies (middle 2/8 to 4/8 of the dataArray)
-    const midrange =
+    let midrange =
       dataArray
         .slice(bufferLength / 4, bufferLength / 2)
         .reduce((a, b) => a + b, 0) /
       (bufferLength / 4);
+    midrange = midrange / 20;
 
     // Calculate high-end frequencies (last 1/8 of the dataArray)
-    const highEnd =
+    let highEnd =
       dataArray.slice((bufferLength * 7) / 8).reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
+    highEnd = highEnd / 50;
 
-    // Adjust logo size using the midrange and high-end frequencies
-    const newSize = 25 + (bass / 5) * (highEnd / 50); // Adjust the scaling factors as needed
+    console.log(`bass : ${bass}`);
+    console.log(`midrange : ${midrange}`);
+    console.log(`highEnd : ${highEnd}`);
 
-    logo.style.width = newSize + "rem"; // Adjust the logo width based on midrange and high-end frequencies
+    // Adjust logo size using the frequencies
+    const newSize = 25 + ((bass / 5) * (highEnd / 50));
+    console.log(`newSize : ${newSize}rem`);
+
+    logo.style.width = newSize + "rem";
 
     requestAnimationFrame(adjustLogoSize);
   }
