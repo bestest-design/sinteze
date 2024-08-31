@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const audio = document.getElementById("backgroundAudio");
   const h1 = document.querySelector("h1[main]");
-
   const playStopBtn = document.getElementById("playStop");
   const muteUnmuteBtn = document.getElementById("muteUnmute");
 
@@ -20,8 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       analyser.connect(audioContext.destination);
       bufferLength = analyser.frequencyBinCount;
       dataArray = new Uint8Array(bufferLength);
-
-      adjustFontSize();
     }
   }
 
@@ -37,14 +34,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Play/Stop button event listener
   playStopBtn.addEventListener("click", () => {
-    initAudio(); // Initialize audio context if not done already
+    if (audioContext && audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    if (!audioContext) {
+      initAudio();
+    }
+
     if (audio.paused) {
-      audio.play().catch((error) => {
-        console.log(error);
-        console.log("attempting to resume");
-        getAudioContext().resume();
-      });
-      playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      audio
+        .play()
+        .then(() => {
+          playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          adjustFontSize();
+        })
+        .catch((error) => {
+          console.log("Error playing audio:", error);
+        });
     } else {
       audio.pause();
       playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -59,8 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
       : '<i class="fas fa-volume-up"></i>';
   });
 
-  // Automatically play audio on page load
-  initAudio();
-  playStopBtn.click();
-  // audio.play().catch((error) => console.log(error));
+  // Initialize audio context on user interaction
+  document.body.addEventListener(
+    "click",
+    function initOnClick() {
+      initAudio();
+      document.body.removeEventListener("click", initOnClick);
+    },
+    { once: true }
+  );
 });
