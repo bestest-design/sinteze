@@ -1,5 +1,5 @@
 // Audio handling
-const audio = new Audio("assets/sinteze.mp3");
+const audio = new Audio("assets/sinteze.ogg");
 audio.loop = true;
 audio.play();
 
