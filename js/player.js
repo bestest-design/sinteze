@@ -57,5 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Automatically play audio on page load
   initAudio();
-  audio.play().catch((error) => console.log(error));
+  playStopBtn.click();
+  // audio.play().catch((error) => console.log(error));
 });
