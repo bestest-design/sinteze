@@ -39,7 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
   playStopBtn.addEventListener("click", () => {
     initAudio(); // Initialize audio context if not done already
     if (audio.paused) {
-      audio.play().catch((error) => console.log(error));
+      audio.play().catch((error) => {
+        console.log(error);
+        console.log("attempting to resume");
+        getAudioContext().resume();
+      });
       playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
     } else {
       audio.pause();
