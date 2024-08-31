@@ -19,9 +19,15 @@
   <link rel="stylesheet" media="all" href="css/noize.css?v1" uncache>
   <script src="js/tconfig.js?v1.2" uncache></script>
   <script src="js/player.js?v1.6" uncache defer></script>
+  <script src="js/main.js?v1" uncache></script>
 </head>
 
 <body>
+  <overlay class="bg-black absolute top-0 left-0 w-full h-full">
+    <div class="text-3xl font-bold text-gray-300 flex flex-row min-h-screen justify-center items-center" onclick="removeOverly()">
+      <i class="fas fa-hand-point-right"></i> Ienākt...
+    </div>
+  </overlay>
   <background class="noize"></background>
   <h1 main class="text-3xl font-bold text-gray-300 flex flex-row min-h-screen justify-center items-center">
     SINTĒZE

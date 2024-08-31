@@ -72,19 +72,4 @@ document.addEventListener("DOMContentLoaded", function () {
       ? '<i class="fas fa-volume-mute"></i>'
       : '<i class="fas fa-volume-up"></i>';
   });
-
-  // Function to handle first user interaction
-  function handleFirstInteraction() {
-    playAudio();
-    document.removeEventListener("mousemove", handleFirstInteraction);
-    document.removeEventListener("touchstart", handleFirstInteraction);
-  }
-
-  // Add event listeners for mouse movement and touch
-  document.addEventListener("mousemove", handleFirstInteraction, {
-    once: true,
-  });
-  document.addEventListener("touchstart", handleFirstInteraction, {
-    once: true,
-  });
 });
