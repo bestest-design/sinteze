@@ -17,7 +17,7 @@
   <script src="https://cdn.tailwindcss.com?plugins=typography,aspect-ratio,container-queries"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" media="all" href="css/noize.css?v1" uncache>
-  <script src="js/tconfig.js?v1" uncache></script>
+  <script src="js/tconfig.js?v1.1" uncache></script>
   <script src="js/player.js?v1.1" uncache defer></script>
 </head>
 
@@ -48,7 +48,7 @@
   </section>
 
   <!-- Fixed Bottom Navigation Bar -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-gray-700 text-white flex justify-between items-center px-4 py-2">
+  <nav class="fixed bottom-0 left-0 right-0 text-white flex justify-between items-center px-4 py-2 backdrop-filter backdrop-blur-lg border-t border-gray-200 firefox:bg-opacity-90">
     <div>
       <span class="text-lg font-bold"></span>
     </div>
@@ -59,7 +59,7 @@
   </nav>
 
   <!-- Invisible Audio Player -->
-  <audio id="backgroundAudio" src="assets/sinteze.ogg" loop></audio>
+  <audio id="backgroundAudio" src="assets/sinteze.ogg?v1" loop></audio>
 </body>
 
 </html>
