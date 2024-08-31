@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const muteUnmuteBtn = document.getElementById("muteUnmute");
 
   let audioContext, analyser, source, bufferLength, dataArray;
+  let isAudioInitialized = false;
 
   // Initialize Audio Context and Analyser
   function initAudio() {
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       analyser.connect(audioContext.destination);
       bufferLength = analyser.frequencyBinCount;
       dataArray = new Uint8Array(bufferLength);
+      isAudioInitialized = true;
     }
   }
 
@@ -32,26 +34,31 @@ document.addEventListener("DOMContentLoaded", function () {
     requestAnimationFrame(adjustFontSize);
   }
 
-  // Play/Stop button event listener
-  playStopBtn.addEventListener("click", () => {
+  // Play audio function
+  function playAudio() {
     if (audioContext && audioContext.state === "suspended") {
       audioContext.resume();
     }
 
-    if (!audioContext) {
+    if (!isAudioInitialized) {
       initAudio();
     }
 
+    audio
+      .play()
+      .then(() => {
+        playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        adjustFontSize();
+      })
+      .catch((error) => {
+        console.log("Error playing audio:", error);
+      });
+  }
+
+  // Play/Stop button event listener
+  playStopBtn.addEventListener("click", () => {
     if (audio.paused) {
-      audio
-        .play()
-        .then(() => {
-          playStopBtn.innerHTML = '<i class="fas fa-pause"></i>';
-          adjustFontSize();
-        })
-        .catch((error) => {
-          console.log("Error playing audio:", error);
-        });
+      playAudio();
     } else {
       audio.pause();
       playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
@@ -66,13 +73,18 @@ document.addEventListener("DOMContentLoaded", function () {
       : '<i class="fas fa-volume-up"></i>';
   });
 
-  // Initialize audio context on user interaction
-  document.body.addEventListener(
-    "click",
-    function initOnClick() {
-      initAudio();
-      document.body.removeEventListener("click", initOnClick);
-    },
-    { once: true }
-  );
+  // Function to handle first user interaction
+  function handleFirstInteraction() {
+    playAudio();
+    document.removeEventListener("mousemove", handleFirstInteraction);
+    document.removeEventListener("touchstart", handleFirstInteraction);
+  }
+
+  // Add event listeners for mouse movement and touch
+  document.addEventListener("mousemove", handleFirstInteraction, {
+    once: true,
+  });
+  document.addEventListener("touchstart", handleFirstInteraction, {
+    once: true,
+  });
 });
