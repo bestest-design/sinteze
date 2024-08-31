@@ -1,4 +1,5 @@
 // player.js
+
 document.addEventListener("DOMContentLoaded", function () {
   const audio = document.getElementById("backgroundAudio");
   const h1 = document.querySelector("h1[main]");
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let audioContext, analyser, source, bufferLength, dataArray;
 
-  // Initialize Audio Context and Analyser only after user interaction
+  // Initialize Audio Context and Analyser
   function initAudio() {
     if (!audioContext) {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       : '<i class="fas fa-volume-up"></i>';
   });
 
-  // Start audio after the user interacts with the page
-  document.body.addEventListener("click", initAudio, { once: true });
+  // Automatically play audio on page load
+  initAudio();
+  audio.play().catch((error) => console.log(error));
 });
