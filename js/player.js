@@ -3,7 +3,7 @@ const audio = new Audio("assets/sinteze.ogg");
 audio.loop = true;
 audio.play();
 
-const h1 = document.querySelector("h1");
+const h1 = document.querySelector("h1[main]");
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = audioContext.createAnalyser();
 analyser.fftSize = 256;
