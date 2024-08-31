@@ -25,13 +25,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Adjust the size of the logo based on low-end frequencies
   function adjustLogoSize() {
     analyser.getByteFrequencyData(dataArray);
+
+    // Calculate bass (low-end) frequencies (first 1/8 of the dataArray)
     const bass =
-      dataArray.slice(0, bufferLength / 8).reduce((a, b) => a + b, 0) /
+      dataArray.slice(0, bufferLength / 8)
+      .reduce((a, b) => a + b, 0) /
       (bufferLength / 8);
-    logo.style.width = 20 + bass / 15 + "rem"; // Adjust the scaling factor as needed
+
+    // Calculate midrange frequencies (middle 2/8 to 4/8 of the dataArray)
+    const midrange =
+      dataArray.slice(bufferLength / 4, bufferLength / 2)
+      .reduce((a, b) => a + b, 0) /
+      (bufferLength / 4);
+
+    // Calculate high-end frequencies (last 1/8 of the dataArray)
+    const highEnd =
+      dataArray.slice((bufferLength * 7) / 8)
+      .reduce((a, b) => a + b, 0) /
+      (bufferLength / 8);
+
+    // Adjust logo size using the midrange and high-end frequencies
+    const newSize = 20 + (bass / 15) + (midrange / 50) * (highEnd / 100); // Adjust the scaling factors as needed
+
+    logo.style.width = newSize + "rem"; // Adjust the logo width based on midrange and high-end frequencies
+    logo.style.height = "auto"; // Maintain aspect ratio by automatically adjusting the height
+
     requestAnimationFrame(adjustLogoSize);
   }
 
