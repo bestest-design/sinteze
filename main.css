@@ -23,6 +23,32 @@ kbd {
   visibility: visible;
 }
 
+summary {
+  cursor: pointer;
+  transition: .3s;
+  user-select: none;
+}
+
+details[open] > content {
+  animation-name: slideDown;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    height: 0;
+    /* padding: 0; */
+  }
+
+  to {
+    opacity: 1;
+    height: 40rem;
+    /* padding: 20px; */
+  }
+}
+
 @keyframes noize-oscillator {
   0% {
     transform: translate(0, 0)
