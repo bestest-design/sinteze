@@ -48,14 +48,14 @@ document.addEventListener("DOMContentLoaded", function () {
       (bufferLength / 4);
     highEnd = highEnd / 10;
 
-    console.log(`bass : ${bass}`);
-    console.log(`midrange : ${midrange}`);
-    console.log(`highEnd : ${highEnd}`);
+    // console.log(`bass : ${bass}`);
+    // console.log(`midrange : ${midrange}`);
+    // console.log(`highEnd : ${highEnd}`);
 
     // Adjust logo size using the frequencies
     let newSize = Math.min(80, Math.max(25, bass + highEnd));
 
-    console.log(`newSize : ${newSize}rem`);
+    // console.log(`newSize : ${newSize}rem`);
 
     logo.style.width = newSize + "rem";
 
@@ -113,5 +113,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Attach the removeOverlay function to the click event
-  overlay.addEventListener("click", removeOverlay);
+  if (overlay) {
+    overlay.addEventListener("click", removeOverlay);
+  }
+
+  // Ensure only one details element is open at a time
+  detailsElements.forEach((details) => {
+    details.addEventListener("toggle", function () {
+      if (this.open) {
+        // Close all other details elements
+        detailsElements.forEach((otherDetails) => {
+          if (otherDetails !== this) {
+            otherDetails.open = false;
+          }
+        });
+      }
+    });
+  });
 });
