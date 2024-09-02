@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const logo = document.getElementById("logo");
   const playStopBtn = document.getElementById("playStop");
   const muteUnmuteBtn = document.getElementById("muteUnmute");
+  const detailsElements = document.querySelectorAll("details");
 
   let audioContext, analyser, source, bufferLength, dataArray;
   let isAudioInitialized = false;
