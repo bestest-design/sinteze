@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const playStopBtn = document.getElementById("playStop");
   const muteUnmuteBtn = document.getElementById("muteUnmute");
   const detailsElements = document.querySelectorAll("details");
+  const albumFrame = document.getElementById("album_2023");
 
   let audioContext, analyser, source, bufferLength, dataArray;
   let isAudioInitialized = false;
@@ -132,14 +133,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  function cleanAlbumizr() {
-    const iframe = document.getElementById("album_2023");
+  function cleanAlbumizr(albumIframe) {
     const iframeDocument =
-      iframe.contentDocument || iframe.contentWindow.document;
+      albumIframe.contentDocument || albumIframe.contentWindow.document;
     const elementToRemove = iframeDocument.getElementById("albumizrTag");
     if (elementToRemove) {
       elementToRemove.remove();
     }
   }
-  cleanAlbumizr();
+
+  albumFrame.addEventListener("load", function () {
+    cleanAlbumizr(albumFrame);
+  });
 });
