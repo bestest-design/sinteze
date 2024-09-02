@@ -131,4 +131,15 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  function cleanAlbumizr() {
+    const iframe = document.getElementById("album_2023");
+    const iframeDocument =
+      iframe.contentDocument || iframe.contentWindow.document;
+    const elementToRemove = iframeDocument.getElementById("albumizrTag");
+    if (elementToRemove) {
+      elementToRemove.remove();
+    }
+  }
+  cleanAlbumizr();
 });
