@@ -24,12 +24,17 @@ kbd {
 }
 
 summary {
+  list-style: none;
   cursor: pointer;
   transition: .3s;
   user-select: none;
 }
 
-details[open] > content {
+details>content {
+  height: 0;
+}
+
+details[open]>content {
   animation-name: slideDown;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
