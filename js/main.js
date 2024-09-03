@@ -153,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (overlay && !getCookie("visited_sinteze")) {
     disableScroll();
   } else if (overlay) {
-    overlay.remove(); // Remove overlay if cookie is set
+    overlay.remove();
+    enableScroll();
   }
 });
