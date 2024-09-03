@@ -11,6 +11,23 @@ document.addEventListener("DOMContentLoaded", function () {
   let audioContext, analyser, source, bufferLength, dataArray;
   let isAudioInitialized = false;
 
+  // Disable scroll function
+  function disableScroll() {
+    document.body.style.overflow = "hidden";
+  }
+
+  // Re-enable scroll function
+  function enableScroll() {
+    document.body.style.overflow = "";
+  }
+
+  // Check if visited_sinteze cookie is set
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+
   // Initialize Audio Context and Analyser
   function initAudio() {
     if (!audioContext) {
@@ -108,7 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.style.opacity = "0";
     setTimeout(() => {
       overlay.remove();
+      enableScroll(); // Re-enable scroll after removing the overlay
     }, 500);
+    document.cookie = "visited_sinteze=true; path=/;"; // Set cookie
   }
 
   // Attach the removeOverlay function to the click event
@@ -129,4 +148,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Disable scroll initially if overlay exists and cookie is not set
+  if (overlay && !getCookie("visited_sinteze")) {
+    disableScroll();
+  } else if (overlay) {
+    overlay.remove(); // Remove overlay if cookie is set
+  }
 });
