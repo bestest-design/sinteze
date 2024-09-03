@@ -104,13 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removeOverlay() {
     playAudio();
-    overlay.style.transition = "opacity 0.5s ease-out"; // Set the duration and easing of the fade-out
-    overlay.style.opacity = "0"; // Start the fade-out by setting opacity to 0
-
-    // After the transition ends, remove the overlay from the DOM
+    overlay.style.transition = "opacity 0.5s ease-out";
+    overlay.style.opacity = "0";
     setTimeout(() => {
       overlay.remove();
-    }, 500); // Timeout duration matches the transition duration
+    }, 500);
   }
 
   // Attach the removeOverlay function to the click event

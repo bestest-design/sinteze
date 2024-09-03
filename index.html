@@ -77,12 +77,12 @@
 
 <body class="font-mono">
 
-  <!-- <overlay class="hidden fixed bg-black top-0 left-0 w-full h-full z-10 cursor-pointer">
+  <overlay
+    class="hidden lg:flex fixed top-0 left-0 w-full h-full z-10 cursor-pointer backdrop-filter backdrop-blur-lg z-0 lg:z-50">
     <div class="text-3xl font-bold text-gray-300 flex flex-row min-h-screen justify-center items-center space-x-2">
-      <i class="fas fa-hand-point-right"></i>
-      <span class="uppercase">Ienākt...</span>
+      <span class="uppercase mt-[15rem] transition-colors hover:text-white">Ienākt</span>
     </div>
-  </overlay> -->
+  </overlay>
 
   <background class="noize"></background>
 
@@ -98,7 +98,7 @@
 
     <div class="flex flex-col lg:flex-row-reverse lg:items-start items-center lg:h-full w-full">
 
-      <div class="w-full text-lg text-left space-y-4 lg:break-words z-0">
+      <div class="text-lg grow text-left space-y-4 lg:break-words z-0">
         <p>"SINTĒZE" ir unikāls notikums, kas apvieno mūzikas radīšanas tehnoloģijas, DJ tehniku un studijas aprīkojumu
           vienuviet.</p>
         <p>Šī pasākuma mērķis ir veicināt elektroniskās mūzikas attīstību Latvijā, sniedzot iespēju apmeklētājiem
@@ -141,7 +141,7 @@
         Oh nooo!!.. Tavs pārlūks diemžēl neatbalsta video.
       </video>
 
-      <video class="lg:hidden w-full h-auto rounded mt-5 z-20" preload="metadata" controls loop>
+      <video class="lg:hidden basis h-auto rounded mt-5 z-20" preload="metadata" controls loop>
         <source src="assets/video/sinteze_recap_2023_sdc.mp4#t=0.1" type="video/mp4">
         Oh nooo!!.. Tavs pārlūks diemžēl neatbalsta video.
       </video>
