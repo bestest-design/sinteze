@@ -149,11 +149,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Disable scroll initially if overlay exists and cookie is not set
-  if (overlay && !getCookie("visited_sinteze")) {
+  // Disable or enable scroll and manage overlay visibility based on cookie and screen size
+  function manageOverlay() {
+    if (!overlay) return;
+
+    const hasVisited = getCookie("visited_sinteze");
+    const isSmallScreen = window.innerWidth < 1024;
+
+    if (hasVisited || isSmallScreen) {
+      overlay.remove();
+      enableScroll();
+      return;
+    }
+
     disableScroll();
-  } else if (overlay) {
-    overlay.remove();
-    enableScroll();
   }
+
+  manageOverlay();
 });
